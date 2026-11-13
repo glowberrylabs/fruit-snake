@@ -4,8 +4,9 @@
 
 - A small offline Android snake game for kids.
 - Pick up and play. No reading required to play. No ads, accounts, or network.
-- Every asset is bundled in the APK. The app requests no permissions at all,
-  including no INTERNET permission.
+- Every asset is bundled in the APK. The app requests no runtime permissions
+  and no INTERNET permission. AndroidX contributes one internal signature-level
+  dynamic receiver permission, which is not user-facing.
 - Short, friendly rounds with immediate replay.
 - High score and mute preference persist across restarts.
 
@@ -154,7 +155,8 @@
 
 - Debug APK builds and installs.
 - `just check` and `just test` pass.
-- The merged manifest contains no permissions.
+- The merged manifest contains no runtime permissions and no INTERNET
+  permission.
 - All three fruits appear and score correctly.
 - Pause, auto-pause, replay, mute, and high score persistence work.
 - Portrait and landscape layouts are both playable.
