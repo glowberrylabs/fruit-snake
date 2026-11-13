@@ -20,9 +20,16 @@ class ScoreStore(context: Context) {
         preferences.edit().putBoolean(KEY_SOUND_ENABLED, enabled).apply()
     }
 
+    fun isSlowMode(): Boolean = preferences.getBoolean(KEY_SLOW_MODE, false)
+
+    fun setSlowMode(enabled: Boolean) {
+        preferences.edit().putBoolean(KEY_SLOW_MODE, enabled).apply()
+    }
+
     private companion object {
         const val PREFERENCES_NAME = "fruit_snake"
         const val KEY_HIGH_SCORE = "high_score"
         const val KEY_SOUND_ENABLED = "sound_enabled"
+        const val KEY_SLOW_MODE = "slow_mode"
     }
 }

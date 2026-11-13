@@ -24,7 +24,8 @@ class GameViewModel(
         GameUiState(
             game = engine.newGame(),
             highScore = scoreStore.loadHighScore(),
-            soundEnabled = scoreStore.isSoundEnabled()
+            soundEnabled = scoreStore.isSoundEnabled(),
+            slowMode = scoreStore.isSlowMode()
         )
     )
     val uiState: StateFlow<GameUiState> = _uiState.asStateFlow()
@@ -63,6 +64,12 @@ class GameViewModel(
         _uiState.value = _uiState.value.copy(soundEnabled = enabled)
     }
 
+    fun toggleSlowMode() {
+        val enabled = !_uiState.value.slowMode
+        scoreStore.setSlowMode(enabled)
+        _uiState.value = _uiState.value.copy(slowMode = enabled)
+    }
+
     private fun startNewGame() {
         stopTicking()
         val current = _uiState.value
@@ -84,9 +91,9 @@ class GameViewModel(
         stopTicking()
         tickJob = viewModelScope.launch {
             while (isActive) {
-                val game = _uiState.value.game
-                if (game.status != GameStatus.RUNNING) break
-                delay(game.tickMillis)
+                val current = _uiState.value
+                if (current.game.status != GameStatus.RUNNING) break
+                delay(current.game.tickMillis(current.slowMode))
                 advanceOneTick()
             }
         }

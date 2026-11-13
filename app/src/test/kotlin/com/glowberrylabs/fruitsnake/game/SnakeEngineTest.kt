@@ -156,11 +156,19 @@ class SnakeEngineTest {
     @Test
     fun tickMillisSpeedsUpAndClampsAtMinimum() {
         val game = runningGame()
-        assertEquals(320L, game.tickMillis)
-        assertEquals(305L, game.copy(score = 5).tickMillis)
-        assertEquals(290L, game.copy(score = 10).tickMillis)
-        assertEquals(275L, game.copy(score = 15).tickMillis)
-        assertEquals(200L, game.copy(score = 1000).tickMillis)
+        assertEquals(320L, game.tickMillis())
+        assertEquals(305L, game.copy(score = 5).tickMillis())
+        assertEquals(290L, game.copy(score = 10).tickMillis())
+        assertEquals(275L, game.copy(score = 15).tickMillis())
+        assertEquals(200L, game.copy(score = 1000).tickMillis())
+    }
+
+    @Test
+    fun slowModeDoublesTickAndClampsAtSlowMinimum() {
+        val game = runningGame()
+        assertEquals(640L, game.tickMillis(slowMode = true))
+        assertEquals(610L, game.copy(score = 5).tickMillis(slowMode = true))
+        assertEquals(400L, game.copy(score = 1000).tickMillis(slowMode = true))
     }
 
     @Test
