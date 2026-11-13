@@ -7,3 +7,8 @@
 /local.properties
 **/build
 .kotlin
+*.jks
+*.keystore
+keystore.properties
+.env
+google-services.json
