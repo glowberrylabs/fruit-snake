@@ -34,6 +34,10 @@ emu-kill:
 logcat:
     adb logcat --pid=$(adb shell pidof {{ app_id }})
 
+# Regenerate the bundled sound effects
+sounds:
+    python3 scripts/make_sounds.py
+
 # Run unit tests
 test:
     bash gradlew test
