@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Fruit Snake</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="resume">Resume</string>
+    <string name="restart">Restart</string>
+    <string name="play_again">Play again</string>
+    <string name="mute_sound">Mute sound</string>
+    <string name="enable_sound">Enable sound</string>
+    <string name="paused">Paused</string>
+    <string name="nice_try">Nice try!</string>
+    <string name="new_best">New best!</string>
+    <string name="board_filled">You filled the board!</string>
+    <string name="start_hint">Swipe the board or tap the arrows</string>
+    <string name="best_score">Best: %1$d</string>
+    <string name="direction_up">Up</string>
+    <string name="direction_down">Down</string>
+    <string name="direction_left">Left</string>
+    <string name="direction_right">Right</string>
+    <plurals name="score_description">
+        <item quantity="one">%1$d fruit</item>
+        <item quantity="other">%1$d fruits</item>
+    </plurals>
 </resources>

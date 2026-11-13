@@ -6,18 +6,13 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.safeDrawingPadding
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.stringResource
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.glowberrylabs.fruitsnake.game.GameViewModel
+import com.glowberrylabs.fruitsnake.game.GameViewModelFactory
 import com.glowberrylabs.fruitsnake.ui.FruitSnakeTheme
+import com.glowberrylabs.fruitsnake.ui.GameScreen
 
 class MainActivity : ComponentActivity() {
 
@@ -32,30 +27,20 @@ class MainActivity : ComponentActivity() {
         )
         setContent {
             FruitSnakeTheme {
-                PlaceholderScreen()
-            }
-        }
-    }
-}
+                val viewModel: GameViewModel = viewModel(
+                    factory = GameViewModelFactory(applicationContext)
+                )
+                val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-@Composable
-private fun PlaceholderScreen() {
-    Surface(
-        modifier = Modifier
-            .fillMaxSize()
-            .safeDrawingPadding(),
-        color = MaterialTheme.colorScheme.background
-    ) {
-        Column(
-            modifier = Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center
-        ) {
-            Text(
-                text = stringResource(R.string.app_name),
-                style = MaterialTheme.typography.displayMedium,
-                color = MaterialTheme.colorScheme.primary
-            )
+                GameScreen(
+                    state = state,
+                    onPlay = viewModel::play,
+                    onPause = viewModel::pause,
+                    onRestart = viewModel::restart,
+                    onDirection = viewModel::turn,
+                    onToggleSound = viewModel::toggleSound
+                )
+            }
         }
     }
 }
