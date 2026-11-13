@@ -48,6 +48,7 @@ fun GameScreen(
     onRestart: () -> Unit,
     onDirection: (Direction) -> Unit,
     onToggleSound: () -> Unit,
+    onToggleSlowMode: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val game = state.game
@@ -82,14 +83,16 @@ fun GameScreen(
                     state = state,
                     onPause = onPause,
                     onDirection = onDirection,
-                    onToggleSound = onToggleSound
+                    onToggleSound = onToggleSound,
+                    onToggleSlowMode = onToggleSlowMode
                 )
             } else {
                 PortraitLayout(
                     state = state,
                     onPause = onPause,
                     onDirection = onDirection,
-                    onToggleSound = onToggleSound
+                    onToggleSound = onToggleSound,
+                    onToggleSlowMode = onToggleSlowMode
                 )
             }
         }
@@ -134,6 +137,7 @@ private fun PortraitLayout(
     onPause: () -> Unit,
     onDirection: (Direction) -> Unit,
     onToggleSound: () -> Unit,
+    onToggleSlowMode: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -143,8 +147,10 @@ private fun PortraitLayout(
         GameHud(
             score = state.game.score,
             soundEnabled = state.soundEnabled,
+            slowMode = state.slowMode,
             pauseEnabled = state.game.status == GameStatus.RUNNING,
             onToggleSound = onToggleSound,
+            onToggleSlowMode = onToggleSlowMode,
             onPause = onPause,
             modifier = Modifier.fillMaxWidth()
         )
@@ -171,6 +177,7 @@ private fun LandscapeLayout(
     onPause: () -> Unit,
     onDirection: (Direction) -> Unit,
     onToggleSound: () -> Unit,
+    onToggleSlowMode: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     Row(
@@ -187,7 +194,7 @@ private fun LandscapeLayout(
         )
         Column(
             modifier = Modifier
-                .width(260.dp)
+                .width(300.dp)
                 .fillMaxHeight(),
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
@@ -195,8 +202,10 @@ private fun LandscapeLayout(
             GameHud(
                 score = state.game.score,
                 soundEnabled = state.soundEnabled,
+                slowMode = state.slowMode,
                 pauseEnabled = state.game.status == GameStatus.RUNNING,
                 onToggleSound = onToggleSound,
+                onToggleSlowMode = onToggleSlowMode,
                 onPause = onPause,
                 modifier = Modifier.fillMaxWidth()
             )

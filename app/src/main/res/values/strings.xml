@@ -8,6 +8,8 @@
     <string name="play_again">Play again</string>
     <string name="mute_sound">Mute sound</string>
     <string name="enable_sound">Enable sound</string>
+    <string name="slow_down">Slow down</string>
+    <string name="normal_speed">Normal speed</string>
     <string name="paused">Paused</string>
     <string name="nice_try">Nice try!</string>
     <string name="new_best">New best!</string>

@@ -38,7 +38,8 @@ class MainActivity : ComponentActivity() {
                     onPause = viewModel::pause,
                     onRestart = viewModel::restart,
                     onDirection = viewModel::turn,
-                    onToggleSound = viewModel::toggleSound
+                    onToggleSound = viewModel::toggleSound,
+                    onToggleSlowMode = viewModel::toggleSlowMode
                 )
             }
         }

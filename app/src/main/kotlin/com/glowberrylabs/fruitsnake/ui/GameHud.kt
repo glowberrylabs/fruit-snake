@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.text.font.FontWeight
@@ -41,8 +42,10 @@ import com.glowberrylabs.fruitsnake.game.Fruit
 fun GameHud(
     score: Int,
     soundEnabled: Boolean,
+    slowMode: Boolean,
     pauseEnabled: Boolean,
     onToggleSound: () -> Unit,
+    onToggleSlowMode: () -> Unit,
     onPause: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -53,6 +56,14 @@ fun GameHud(
     ) {
         ScorePill(score = score)
         Row(horizontalArrangement = Arrangement.spacedBy(10.dp)) {
+            HudIconButton(
+                imageVector = ImageVector.vectorResource(R.drawable.ic_turtle),
+                contentDescription = stringResource(
+                    if (slowMode) R.string.normal_speed else R.string.slow_down
+                ),
+                onClick = onToggleSlowMode,
+                selected = slowMode
+            )
             HudIconButton(
                 imageVector = if (soundEnabled) {
                     Icons.AutoMirrored.Filled.VolumeUp
@@ -122,7 +133,8 @@ private fun HudIconButton(
     imageVector: ImageVector,
     contentDescription: String,
     onClick: () -> Unit,
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    selected: Boolean = false
 ) {
     FilledIconButton(
         onClick = onClick,
@@ -132,8 +144,8 @@ private fun HudIconButton(
             .shadow(4.dp, CircleShape),
         shape = CircleShape,
         colors = IconButtonDefaults.filledIconButtonColors(
-            containerColor = Color.White,
-            contentColor = GamePalette.snakeHead,
+            containerColor = if (selected) GamePalette.snakeHead else Color.White,
+            contentColor = if (selected) Color.White else GamePalette.snakeHead,
             disabledContainerColor = Color.White.copy(alpha = 0.65f),
             disabledContentColor = GamePalette.snakeHead.copy(alpha = 0.35f)
         )
