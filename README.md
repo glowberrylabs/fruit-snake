@@ -13,7 +13,8 @@ permissions.
 - Avoid the walls and your own tail.
 - Tap pause any time. The game also pauses when the app goes to the
   background.
-- Best score and sound preference are saved on the device.
+- Tap the turtle to slow the snake down. The setting is remembered.
+- Best score, sound, and slow-mode preferences are saved on the device.
 
 ## Build
 
